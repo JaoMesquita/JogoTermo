@@ -69,7 +69,7 @@
                 }
                 else
                 {
-                    cor = 'P';
+                    cor = 'P'; // comentario
                 }
                 palavraTabuleiro.Add(new letra(palavra[i], cor));
                 teclado[palavra[i]] = cor;
