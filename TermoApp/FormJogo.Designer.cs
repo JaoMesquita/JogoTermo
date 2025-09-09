@@ -729,7 +729,6 @@
             btnEnter.Text = "ENTER";
             btnEnter.UseVisualStyleBackColor = false;
             btnEnter.Click += btnEnter_Click;
-            btnEnter.KeyDown += btnEnter_KeyDown;
             // 
             // groupBox1
             // 

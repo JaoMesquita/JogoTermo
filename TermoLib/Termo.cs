@@ -18,6 +18,7 @@
         public List<List<letra>> tabuleiro;
         public Dictionary<char, char> teclado;
         public int palavraAtual;
+        public bool JogoFinalizado;
 
         public Termo()
         {
@@ -48,6 +49,8 @@
 
         public void ChecaPalavra(string palavra)
         {
+            if (palavra == palavraSorteada)
+                JogoFinalizado = true;
             if (palavra.Length != 5)
                 throw new Exception("Palavra com tamanho incorreto!");
 
@@ -62,7 +65,7 @@
                 }
                 else if (palavraSorteada.Contains(palavra[i]))
                 {
-                    cor = 'A';
+                    cor = 'A'; // comentario
                 }
                 else
                 {
