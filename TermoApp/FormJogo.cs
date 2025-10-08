@@ -1,3 +1,4 @@
+using System.Media;
 using TermoLib;
 
 namespace TermoApp
@@ -6,14 +7,17 @@ namespace TermoApp
     {
         public Termo termo;
         int coluna = 1;
-        private System.Windows.Forms.Timer timer;
-        private int segundosDecorridos = 0;
+        private System.Windows.Forms.Timer? timer;
         private System.Diagnostics.Stopwatch cronometro;
+        private bool musicaLigada = true;
+        private SoundPlayer? player;
 
         public FormJogo()
         {
             InitializeComponent();
             cronometro = new System.Diagnostics.Stopwatch();
+            player = new SoundPlayer(Properties.Resources.MusicAudio);
+            player.PlayLooping();
             InicializaTimer();
 
             termo = new Termo();
@@ -27,7 +31,7 @@ namespace TermoApp
         private void InicializaTimer()
         {
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = 10; // 10 ms para atualizar milissegundos
+            timer.Interval = 10;
             timer.Tick += Temporizador_Tick;
             timer.Start();
             cronometro.Restart();
@@ -44,7 +48,7 @@ namespace TermoApp
             coluna++;
         }
 
-        private void Temporizador_Tick(object sender, EventArgs e)
+        private void Temporizador_Tick(object? sender, EventArgs e)
         {
             TimeSpan tempo = cronometro.Elapsed;
             lblTimer.Text = tempo.ToString(@"mm\:ss\.ff");
@@ -64,8 +68,9 @@ namespace TermoApp
             coluna = 1;
             if (termo.JogoFinalizado)
             {
-                timer.Stop();
-                MessageBox.Show("Parabéns! Você acertou a palavra!", "Jogo termo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (timer != null)
+                    timer.Stop();
+                MessageBox.Show("Parabéns! Você acertou a palavra!", "Jogo Termo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -114,15 +119,15 @@ namespace TermoApp
             }
         }
 
-        private void FormJogo_KeyDown(object sender, KeyEventArgs e)
+        private void FormJogo_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnEnter_Click(null, EventArgs.Empty);
+                btnEnter_Click(this, EventArgs.Empty);
             }
             else if (e.KeyCode == Keys.Back)
             {
-                btnBackspace_Click(null, EventArgs.Empty);
+                btnBackspace_Click(this, EventArgs.Empty);
             }
             // Depois trata letras A-Z
             else if (e.KeyCode >= Keys.A && e.KeyCode <= Keys.Z)
@@ -144,7 +149,7 @@ namespace TermoApp
         {
             if (keyData == Keys.Enter)
             {
-                btnEnter_Click(null, EventArgs.Empty);
+                btnEnter_Click(this, EventArgs.Empty);
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
@@ -184,14 +189,29 @@ namespace TermoApp
             }
 
             // Reseta timer e contador
-            segundosDecorridos = 0;
             lblTimer.Text = "00:00";
             cronometro.Restart();
-            timer.Stop();
-            timer.Start();
-
-            // Reseta coluna
+            if (timer != null)
+            {
+                timer.Stop();
+                timer.Start();
+            }
             coluna = 1;
+        }
+
+        private void IconMusic_Click(object sender, EventArgs e)
+        {
+            musicaLigada = !musicaLigada;
+            if (musicaLigada)
+            {
+                IconMusic.Image = Properties.Resources.MusicOn;
+                player?.PlayLooping();
+            }
+            else
+            {
+                IconMusic.Image = Properties.Resources.musicOff;
+                player?.Stop();
+            }
         }
     }
 

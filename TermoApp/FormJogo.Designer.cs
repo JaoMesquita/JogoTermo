@@ -86,19 +86,20 @@
             btnN = new Button();
             btnM = new Button();
             btnEnter = new Button();
-            groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
             lblTimer = new Label();
             btnReiniciar = new Button();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
+            IconMusic = new PictureBox();
+            pictureBoxFundo = new PictureBox();
+            button1 = new Button();
+            ((System.ComponentModel.ISupportInitialize)IconMusic).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxFundo).BeginInit();
             SuspendLayout();
             // 
             // btn11
             // 
-            btn11.BackColor = SystemColors.ControlLight;
+            btn11.BackColor = Color.Transparent;
             btn11.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn11.Location = new Point(16, 21);
+            btn11.Location = new Point(43, 23);
             btn11.Margin = new Padding(3, 4, 3, 4);
             btn11.Name = "btn11";
             btn11.Size = new Size(64, 45);
@@ -109,7 +110,7 @@
             // 
             btn12.BackColor = SystemColors.ControlLight;
             btn12.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn12.Location = new Point(105, 21);
+            btn12.Location = new Point(113, 23);
             btn12.Margin = new Padding(3, 4, 3, 4);
             btn12.Name = "btn12";
             btn12.Size = new Size(64, 45);
@@ -120,7 +121,7 @@
             // 
             btn13.BackColor = SystemColors.ControlLight;
             btn13.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn13.Location = new Point(194, 21);
+            btn13.Location = new Point(183, 23);
             btn13.Margin = new Padding(3, 4, 3, 4);
             btn13.Name = "btn13";
             btn13.Size = new Size(64, 45);
@@ -131,7 +132,7 @@
             // 
             btn14.BackColor = SystemColors.ControlLight;
             btn14.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn14.Location = new Point(283, 21);
+            btn14.Location = new Point(253, 23);
             btn14.Margin = new Padding(3, 4, 3, 4);
             btn14.Name = "btn14";
             btn14.Size = new Size(64, 45);
@@ -142,7 +143,7 @@
             // 
             btn15.BackColor = SystemColors.ControlLight;
             btn15.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn15.Location = new Point(373, 21);
+            btn15.Location = new Point(323, 23);
             btn15.Margin = new Padding(3, 4, 3, 4);
             btn15.Name = "btn15";
             btn15.Size = new Size(64, 45);
@@ -153,7 +154,7 @@
             // 
             btn25.BackColor = SystemColors.ControlLight;
             btn25.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn25.Location = new Point(373, 75);
+            btn25.Location = new Point(323, 76);
             btn25.Margin = new Padding(3, 4, 3, 4);
             btn25.Name = "btn25";
             btn25.Size = new Size(64, 45);
@@ -164,7 +165,7 @@
             // 
             btn24.BackColor = SystemColors.ControlLight;
             btn24.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn24.Location = new Point(283, 75);
+            btn24.Location = new Point(253, 76);
             btn24.Margin = new Padding(3, 4, 3, 4);
             btn24.Name = "btn24";
             btn24.Size = new Size(64, 45);
@@ -175,7 +176,7 @@
             // 
             btn23.BackColor = SystemColors.ControlLight;
             btn23.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn23.Location = new Point(194, 75);
+            btn23.Location = new Point(183, 76);
             btn23.Margin = new Padding(3, 4, 3, 4);
             btn23.Name = "btn23";
             btn23.Size = new Size(64, 45);
@@ -186,7 +187,7 @@
             // 
             btn22.BackColor = SystemColors.ControlLight;
             btn22.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn22.Location = new Point(105, 75);
+            btn22.Location = new Point(113, 76);
             btn22.Margin = new Padding(3, 4, 3, 4);
             btn22.Name = "btn22";
             btn22.Size = new Size(64, 45);
@@ -197,7 +198,7 @@
             // 
             btn21.BackColor = SystemColors.ControlLight;
             btn21.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn21.Location = new Point(16, 75);
+            btn21.Location = new Point(43, 76);
             btn21.Margin = new Padding(3, 4, 3, 4);
             btn21.Name = "btn21";
             btn21.Size = new Size(64, 45);
@@ -208,7 +209,7 @@
             // 
             btn35.BackColor = SystemColors.ControlLight;
             btn35.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn35.Location = new Point(373, 128);
+            btn35.Location = new Point(323, 129);
             btn35.Margin = new Padding(3, 4, 3, 4);
             btn35.Name = "btn35";
             btn35.Size = new Size(64, 45);
@@ -219,7 +220,7 @@
             // 
             btn34.BackColor = SystemColors.ControlLight;
             btn34.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn34.Location = new Point(283, 128);
+            btn34.Location = new Point(253, 129);
             btn34.Margin = new Padding(3, 4, 3, 4);
             btn34.Name = "btn34";
             btn34.Size = new Size(64, 45);
@@ -230,7 +231,7 @@
             // 
             btn33.BackColor = SystemColors.ControlLight;
             btn33.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn33.Location = new Point(194, 128);
+            btn33.Location = new Point(183, 129);
             btn33.Margin = new Padding(3, 4, 3, 4);
             btn33.Name = "btn33";
             btn33.Size = new Size(64, 45);
@@ -241,7 +242,7 @@
             // 
             btn32.BackColor = SystemColors.ControlLight;
             btn32.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn32.Location = new Point(105, 128);
+            btn32.Location = new Point(113, 129);
             btn32.Margin = new Padding(3, 4, 3, 4);
             btn32.Name = "btn32";
             btn32.Size = new Size(64, 45);
@@ -252,7 +253,7 @@
             // 
             btn31.BackColor = SystemColors.ControlLight;
             btn31.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn31.Location = new Point(16, 128);
+            btn31.Location = new Point(43, 129);
             btn31.Margin = new Padding(3, 4, 3, 4);
             btn31.Name = "btn31";
             btn31.Size = new Size(64, 45);
@@ -263,7 +264,7 @@
             // 
             btn65.BackColor = SystemColors.ControlLight;
             btn65.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn65.Location = new Point(373, 288);
+            btn65.Location = new Point(323, 288);
             btn65.Margin = new Padding(3, 4, 3, 4);
             btn65.Name = "btn65";
             btn65.Size = new Size(64, 45);
@@ -274,7 +275,7 @@
             // 
             btn64.BackColor = SystemColors.ControlLight;
             btn64.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn64.Location = new Point(283, 288);
+            btn64.Location = new Point(253, 288);
             btn64.Margin = new Padding(3, 4, 3, 4);
             btn64.Name = "btn64";
             btn64.Size = new Size(64, 45);
@@ -285,7 +286,7 @@
             // 
             btn63.BackColor = SystemColors.ControlLight;
             btn63.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn63.Location = new Point(194, 288);
+            btn63.Location = new Point(183, 288);
             btn63.Margin = new Padding(3, 4, 3, 4);
             btn63.Name = "btn63";
             btn63.Size = new Size(64, 45);
@@ -296,7 +297,7 @@
             // 
             btn62.BackColor = SystemColors.ControlLight;
             btn62.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn62.Location = new Point(105, 288);
+            btn62.Location = new Point(113, 288);
             btn62.Margin = new Padding(3, 4, 3, 4);
             btn62.Name = "btn62";
             btn62.Size = new Size(64, 45);
@@ -307,7 +308,7 @@
             // 
             btn61.BackColor = SystemColors.ControlLight;
             btn61.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn61.Location = new Point(16, 288);
+            btn61.Location = new Point(43, 288);
             btn61.Margin = new Padding(3, 4, 3, 4);
             btn61.Name = "btn61";
             btn61.Size = new Size(64, 45);
@@ -318,7 +319,7 @@
             // 
             btn55.BackColor = SystemColors.ControlLight;
             btn55.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn55.Location = new Point(373, 235);
+            btn55.Location = new Point(323, 235);
             btn55.Margin = new Padding(3, 4, 3, 4);
             btn55.Name = "btn55";
             btn55.Size = new Size(64, 45);
@@ -329,7 +330,7 @@
             // 
             btn54.BackColor = SystemColors.ControlLight;
             btn54.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn54.Location = new Point(283, 235);
+            btn54.Location = new Point(253, 235);
             btn54.Margin = new Padding(3, 4, 3, 4);
             btn54.Name = "btn54";
             btn54.Size = new Size(64, 45);
@@ -340,7 +341,7 @@
             // 
             btn53.BackColor = SystemColors.ControlLight;
             btn53.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn53.Location = new Point(194, 235);
+            btn53.Location = new Point(183, 235);
             btn53.Margin = new Padding(3, 4, 3, 4);
             btn53.Name = "btn53";
             btn53.Size = new Size(64, 45);
@@ -351,7 +352,7 @@
             // 
             btn52.BackColor = SystemColors.ControlLight;
             btn52.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn52.Location = new Point(105, 235);
+            btn52.Location = new Point(113, 235);
             btn52.Margin = new Padding(3, 4, 3, 4);
             btn52.Name = "btn52";
             btn52.Size = new Size(64, 45);
@@ -362,7 +363,7 @@
             // 
             btn51.BackColor = SystemColors.ControlLight;
             btn51.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn51.Location = new Point(16, 235);
+            btn51.Location = new Point(43, 235);
             btn51.Margin = new Padding(3, 4, 3, 4);
             btn51.Name = "btn51";
             btn51.Size = new Size(64, 45);
@@ -373,7 +374,7 @@
             // 
             btn45.BackColor = SystemColors.ControlLight;
             btn45.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn45.Location = new Point(373, 181);
+            btn45.Location = new Point(323, 182);
             btn45.Margin = new Padding(3, 4, 3, 4);
             btn45.Name = "btn45";
             btn45.Size = new Size(64, 45);
@@ -384,7 +385,7 @@
             // 
             btn44.BackColor = SystemColors.ControlLight;
             btn44.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn44.Location = new Point(283, 181);
+            btn44.Location = new Point(253, 182);
             btn44.Margin = new Padding(3, 4, 3, 4);
             btn44.Name = "btn44";
             btn44.Size = new Size(64, 45);
@@ -395,7 +396,7 @@
             // 
             btn43.BackColor = SystemColors.ControlLight;
             btn43.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn43.Location = new Point(194, 181);
+            btn43.Location = new Point(183, 182);
             btn43.Margin = new Padding(3, 4, 3, 4);
             btn43.Name = "btn43";
             btn43.Size = new Size(64, 45);
@@ -406,7 +407,7 @@
             // 
             btn42.BackColor = SystemColors.ControlLight;
             btn42.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn42.Location = new Point(105, 181);
+            btn42.Location = new Point(113, 182);
             btn42.Margin = new Padding(3, 4, 3, 4);
             btn42.Name = "btn42";
             btn42.Size = new Size(64, 45);
@@ -417,7 +418,7 @@
             // 
             btn41.BackColor = SystemColors.ControlLight;
             btn41.Font = new Font("Segoe Script", 9F, FontStyle.Bold);
-            btn41.Location = new Point(16, 181);
+            btn41.Location = new Point(43, 182);
             btn41.Margin = new Padding(3, 4, 3, 4);
             btn41.Name = "btn41";
             btn41.Size = new Size(64, 45);
@@ -428,7 +429,7 @@
             // 
             btnQ.BackColor = SystemColors.ButtonFace;
             btnQ.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnQ.Location = new Point(31, 17);
+            btnQ.Location = new Point(12, 373);
             btnQ.Margin = new Padding(3, 4, 3, 4);
             btnQ.Name = "btnQ";
             btnQ.Size = new Size(50, 56);
@@ -441,7 +442,7 @@
             // 
             btnW.BackColor = SystemColors.ButtonFace;
             btnW.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnW.Location = new Point(88, 17);
+            btnW.Location = new Point(69, 373);
             btnW.Margin = new Padding(3, 4, 3, 4);
             btnW.Name = "btnW";
             btnW.Size = new Size(50, 56);
@@ -454,7 +455,7 @@
             // 
             btnE.BackColor = SystemColors.ButtonFace;
             btnE.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnE.Location = new Point(145, 17);
+            btnE.Location = new Point(126, 373);
             btnE.Margin = new Padding(3, 4, 3, 4);
             btnE.Name = "btnE";
             btnE.Size = new Size(50, 56);
@@ -467,7 +468,7 @@
             // 
             btnR.BackColor = SystemColors.ButtonFace;
             btnR.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnR.Location = new Point(202, 17);
+            btnR.Location = new Point(183, 373);
             btnR.Margin = new Padding(3, 4, 3, 4);
             btnR.Name = "btnR";
             btnR.Size = new Size(50, 56);
@@ -480,7 +481,7 @@
             // 
             btnT.BackColor = SystemColors.ButtonFace;
             btnT.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnT.Location = new Point(259, 17);
+            btnT.Location = new Point(240, 373);
             btnT.Margin = new Padding(3, 4, 3, 4);
             btnT.Name = "btnT";
             btnT.Size = new Size(50, 56);
@@ -493,7 +494,7 @@
             // 
             btnY.BackColor = SystemColors.ButtonFace;
             btnY.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnY.Location = new Point(320, 17);
+            btnY.Location = new Point(301, 373);
             btnY.Margin = new Padding(3, 4, 3, 4);
             btnY.Name = "btnY";
             btnY.Size = new Size(50, 56);
@@ -506,7 +507,7 @@
             // 
             btnU.BackColor = SystemColors.ButtonFace;
             btnU.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnU.Location = new Point(377, 17);
+            btnU.Location = new Point(358, 373);
             btnU.Margin = new Padding(3, 4, 3, 4);
             btnU.Name = "btnU";
             btnU.Size = new Size(50, 56);
@@ -519,7 +520,7 @@
             // 
             btnI.BackColor = SystemColors.ButtonFace;
             btnI.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnI.Location = new Point(434, 17);
+            btnI.Location = new Point(415, 373);
             btnI.Margin = new Padding(3, 4, 3, 4);
             btnI.Name = "btnI";
             btnI.Size = new Size(50, 56);
@@ -532,7 +533,7 @@
             // 
             btnO.BackColor = SystemColors.ButtonFace;
             btnO.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnO.Location = new Point(491, 17);
+            btnO.Location = new Point(472, 373);
             btnO.Margin = new Padding(3, 4, 3, 4);
             btnO.Name = "btnO";
             btnO.Size = new Size(50, 56);
@@ -545,7 +546,7 @@
             // 
             btnP.BackColor = SystemColors.ButtonFace;
             btnP.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnP.Location = new Point(549, 17);
+            btnP.Location = new Point(530, 373);
             btnP.Margin = new Padding(3, 4, 3, 4);
             btnP.Name = "btnP";
             btnP.Size = new Size(50, 56);
@@ -558,7 +559,7 @@
             // 
             btnA.BackColor = SystemColors.ButtonFace;
             btnA.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnA.Location = new Point(55, 81);
+            btnA.Location = new Point(36, 437);
             btnA.Margin = new Padding(3, 4, 3, 4);
             btnA.Name = "btnA";
             btnA.Size = new Size(50, 56);
@@ -571,7 +572,7 @@
             // 
             btnS.BackColor = SystemColors.ButtonFace;
             btnS.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnS.Location = new Point(112, 81);
+            btnS.Location = new Point(93, 437);
             btnS.Margin = new Padding(3, 4, 3, 4);
             btnS.Name = "btnS";
             btnS.Size = new Size(50, 56);
@@ -584,7 +585,7 @@
             // 
             btnD.BackColor = SystemColors.ButtonFace;
             btnD.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnD.Location = new Point(169, 81);
+            btnD.Location = new Point(150, 437);
             btnD.Margin = new Padding(3, 4, 3, 4);
             btnD.Name = "btnD";
             btnD.Size = new Size(50, 56);
@@ -597,7 +598,7 @@
             // 
             btnF.BackColor = SystemColors.ButtonFace;
             btnF.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnF.Location = new Point(226, 81);
+            btnF.Location = new Point(207, 437);
             btnF.Margin = new Padding(3, 4, 3, 4);
             btnF.Name = "btnF";
             btnF.Size = new Size(50, 56);
@@ -610,7 +611,7 @@
             // 
             btnG.BackColor = SystemColors.ButtonFace;
             btnG.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnG.Location = new Point(283, 81);
+            btnG.Location = new Point(264, 437);
             btnG.Margin = new Padding(3, 4, 3, 4);
             btnG.Name = "btnG";
             btnG.Size = new Size(50, 56);
@@ -623,7 +624,7 @@
             // 
             btnH.BackColor = SystemColors.ButtonFace;
             btnH.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnH.Location = new Point(341, 81);
+            btnH.Location = new Point(322, 437);
             btnH.Margin = new Padding(3, 4, 3, 4);
             btnH.Name = "btnH";
             btnH.Size = new Size(50, 56);
@@ -636,7 +637,7 @@
             // 
             btnJ.BackColor = SystemColors.ButtonFace;
             btnJ.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnJ.Location = new Point(398, 81);
+            btnJ.Location = new Point(379, 437);
             btnJ.Margin = new Padding(3, 4, 3, 4);
             btnJ.Name = "btnJ";
             btnJ.Size = new Size(50, 56);
@@ -649,7 +650,7 @@
             // 
             btnK.BackColor = SystemColors.ButtonFace;
             btnK.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnK.Location = new Point(455, 81);
+            btnK.Location = new Point(436, 437);
             btnK.Margin = new Padding(3, 4, 3, 4);
             btnK.Name = "btnK";
             btnK.Size = new Size(50, 56);
@@ -662,7 +663,7 @@
             // 
             btnL.BackColor = SystemColors.ButtonFace;
             btnL.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnL.Location = new Point(512, 81);
+            btnL.Location = new Point(493, 437);
             btnL.Margin = new Padding(3, 4, 3, 4);
             btnL.Name = "btnL";
             btnL.Size = new Size(50, 56);
@@ -675,7 +676,7 @@
             // 
             btnBackspace.BackColor = SystemColors.ButtonFace;
             btnBackspace.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnBackspace.Location = new Point(569, 81);
+            btnBackspace.Location = new Point(550, 437);
             btnBackspace.Margin = new Padding(3, 4, 3, 4);
             btnBackspace.Name = "btnBackspace";
             btnBackspace.Size = new Size(50, 56);
@@ -688,7 +689,7 @@
             // 
             btnZ.BackColor = SystemColors.ButtonFace;
             btnZ.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnZ.Location = new Point(88, 145);
+            btnZ.Location = new Point(69, 501);
             btnZ.Margin = new Padding(3, 4, 3, 4);
             btnZ.Name = "btnZ";
             btnZ.Size = new Size(50, 56);
@@ -701,7 +702,7 @@
             // 
             btnX.BackColor = SystemColors.ButtonFace;
             btnX.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnX.Location = new Point(145, 145);
+            btnX.Location = new Point(126, 501);
             btnX.Margin = new Padding(3, 4, 3, 4);
             btnX.Name = "btnX";
             btnX.Size = new Size(50, 56);
@@ -714,7 +715,7 @@
             // 
             btnC.BackColor = SystemColors.ButtonFace;
             btnC.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnC.Location = new Point(202, 145);
+            btnC.Location = new Point(183, 501);
             btnC.Margin = new Padding(3, 4, 3, 4);
             btnC.Name = "btnC";
             btnC.Size = new Size(50, 56);
@@ -727,7 +728,7 @@
             // 
             btnV.BackColor = SystemColors.ButtonFace;
             btnV.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnV.Location = new Point(259, 145);
+            btnV.Location = new Point(240, 501);
             btnV.Margin = new Padding(3, 4, 3, 4);
             btnV.Name = "btnV";
             btnV.Size = new Size(50, 56);
@@ -740,7 +741,7 @@
             // 
             btnB.BackColor = SystemColors.ButtonFace;
             btnB.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnB.Location = new Point(317, 145);
+            btnB.Location = new Point(298, 501);
             btnB.Margin = new Padding(3, 4, 3, 4);
             btnB.Name = "btnB";
             btnB.Size = new Size(50, 56);
@@ -753,7 +754,7 @@
             // 
             btnN.BackColor = SystemColors.ButtonFace;
             btnN.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnN.Location = new Point(377, 145);
+            btnN.Location = new Point(358, 501);
             btnN.Margin = new Padding(3, 4, 3, 4);
             btnN.Name = "btnN";
             btnN.Size = new Size(50, 56);
@@ -766,7 +767,7 @@
             // 
             btnM.BackColor = SystemColors.ButtonFace;
             btnM.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnM.Location = new Point(434, 145);
+            btnM.Location = new Point(415, 501);
             btnM.Margin = new Padding(3, 4, 3, 4);
             btnM.Name = "btnM";
             btnM.Size = new Size(50, 56);
@@ -779,7 +780,7 @@
             // 
             btnEnter.BackColor = SystemColors.ButtonFace;
             btnEnter.Font = new Font("Segoe Print", 9F, FontStyle.Bold);
-            btnEnter.Location = new Point(491, 145);
+            btnEnter.Location = new Point(472, 501);
             btnEnter.Margin = new Padding(3, 4, 3, 4);
             btnEnter.Name = "btnEnter";
             btnEnter.Size = new Size(128, 56);
@@ -788,99 +789,21 @@
             btnEnter.UseVisualStyleBackColor = false;
             btnEnter.Click += btnEnter_Click;
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(btnH);
-            groupBox1.Controls.Add(btnEnter);
-            groupBox1.Controls.Add(btnQ);
-            groupBox1.Controls.Add(btnM);
-            groupBox1.Controls.Add(btnW);
-            groupBox1.Controls.Add(btnN);
-            groupBox1.Controls.Add(btnE);
-            groupBox1.Controls.Add(btnB);
-            groupBox1.Controls.Add(btnR);
-            groupBox1.Controls.Add(btnV);
-            groupBox1.Controls.Add(btnT);
-            groupBox1.Controls.Add(btnC);
-            groupBox1.Controls.Add(btnY);
-            groupBox1.Controls.Add(btnX);
-            groupBox1.Controls.Add(btnU);
-            groupBox1.Controls.Add(btnZ);
-            groupBox1.Controls.Add(btnI);
-            groupBox1.Controls.Add(btnBackspace);
-            groupBox1.Controls.Add(btnO);
-            groupBox1.Controls.Add(btnL);
-            groupBox1.Controls.Add(btnP);
-            groupBox1.Controls.Add(btnK);
-            groupBox1.Controls.Add(btnA);
-            groupBox1.Controls.Add(btnJ);
-            groupBox1.Controls.Add(btnS);
-            groupBox1.Controls.Add(btnD);
-            groupBox1.Controls.Add(btnG);
-            groupBox1.Controls.Add(btnF);
-            groupBox1.Location = new Point(22, 366);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(669, 221);
-            groupBox1.TabIndex = 58;
-            groupBox1.TabStop = false;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(btn33);
-            groupBox2.Controls.Add(btn65);
-            groupBox2.Controls.Add(btn11);
-            groupBox2.Controls.Add(btn64);
-            groupBox2.Controls.Add(btn12);
-            groupBox2.Controls.Add(btn63);
-            groupBox2.Controls.Add(btn13);
-            groupBox2.Controls.Add(btn62);
-            groupBox2.Controls.Add(btn14);
-            groupBox2.Controls.Add(btn61);
-            groupBox2.Controls.Add(btn15);
-            groupBox2.Controls.Add(btn55);
-            groupBox2.Controls.Add(btn21);
-            groupBox2.Controls.Add(btn54);
-            groupBox2.Controls.Add(btn22);
-            groupBox2.Controls.Add(btn53);
-            groupBox2.Controls.Add(btn23);
-            groupBox2.Controls.Add(btn52);
-            groupBox2.Controls.Add(btn24);
-            groupBox2.Controls.Add(btn51);
-            groupBox2.Controls.Add(btn25);
-            groupBox2.Controls.Add(btn45);
-            groupBox2.Controls.Add(btn31);
-            groupBox2.Controls.Add(btn44);
-            groupBox2.Controls.Add(btn32);
-            groupBox2.Controls.Add(btn43);
-            groupBox2.Controls.Add(btn34);
-            groupBox2.Controls.Add(btn42);
-            groupBox2.Controls.Add(btn35);
-            groupBox2.Controls.Add(btn41);
-            groupBox2.Location = new Point(128, 15);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(456, 343);
-            groupBox2.TabIndex = 59;
-            groupBox2.TabStop = false;
-            groupBox2.Text = " ";
-            // 
             // lblTimer
             // 
             lblTimer.AutoSize = true;
             lblTimer.BackColor = Color.White;
             lblTimer.Font = new Font("Unispace", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTimer.Location = new Point(641, 45);
+            lblTimer.Location = new Point(571, 35);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(0, 36);
             lblTimer.TabIndex = 60;
             // 
             // btnReiniciar
             // 
+            btnReiniciar.Cursor = Cursors.Hand;
             btnReiniciar.Font = new Font("Segoe Print", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReiniciar.Location = new Point(747, 520);
+            btnReiniciar.Location = new Point(692, 503);
             btnReiniciar.Name = "btnReiniciar";
             btnReiniciar.Size = new Size(152, 47);
             btnReiniciar.TabIndex = 61;
@@ -888,22 +811,117 @@
             btnReiniciar.UseVisualStyleBackColor = true;
             btnReiniciar.Click += btnReiniciar_Click;
             // 
+            // IconMusic
+            // 
+            IconMusic.BackColor = Color.Transparent;
+            IconMusic.Cursor = Cursors.Hand;
+            IconMusic.Image = Properties.Resources.MusicOn;
+            IconMusic.Location = new Point(863, 12);
+            IconMusic.Name = "IconMusic";
+            IconMusic.Size = new Size(56, 45);
+            IconMusic.SizeMode = PictureBoxSizeMode.CenterImage;
+            IconMusic.TabIndex = 62;
+            IconMusic.TabStop = false;
+            IconMusic.Click += IconMusic_Click;
+            // 
+            // pictureBoxFundo
+            // 
+            pictureBoxFundo.BackColor = Color.Transparent;
+            pictureBoxFundo.Dock = DockStyle.Fill;
+            pictureBoxFundo.Image = Properties.Resources.GifBackground;
+            pictureBoxFundo.Location = new Point(0, 0);
+            pictureBoxFundo.Name = "pictureBoxFundo";
+            pictureBoxFundo.Size = new Size(931, 600);
+            pictureBoxFundo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxFundo.TabIndex = 64;
+            pictureBoxFundo.TabStop = false;
+            // 
+            // button1
+            // 
+            button1.AutoSize = true;
+            button1.BackColor = Color.DarkSalmon;
+            button1.Image = Properties.Resources.infoImagem;
+            button1.Location = new Point(801, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(43, 45);
+            button1.TabIndex = 65;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // FormJogo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(128, 64, 0);
+            BackColor = Color.DarkSalmon;
             ClientSize = new Size(931, 600);
+            Controls.Add(button1);
+            Controls.Add(btnH);
+            Controls.Add(btn45);
+            Controls.Add(btnEnter);
+            Controls.Add(btnQ);
+            Controls.Add(btnM);
+            Controls.Add(btn33);
+            Controls.Add(btnW);
+            Controls.Add(IconMusic);
+            Controls.Add(btnN);
+            Controls.Add(btn65);
+            Controls.Add(btnE);
             Controls.Add(btnReiniciar);
+            Controls.Add(btnB);
+            Controls.Add(btn11);
+            Controls.Add(btnR);
             Controls.Add(lblTimer);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
+            Controls.Add(btnV);
+            Controls.Add(btn64);
+            Controls.Add(btnT);
+            Controls.Add(btnC);
+            Controls.Add(btn12);
+            Controls.Add(btnY);
+            Controls.Add(btn63);
+            Controls.Add(btnX);
+            Controls.Add(btn13);
+            Controls.Add(btnU);
+            Controls.Add(btn22);
+            Controls.Add(btnZ);
+            Controls.Add(btn62);
+            Controls.Add(btnI);
+            Controls.Add(btn41);
+            Controls.Add(btnBackspace);
+            Controls.Add(btn14);
+            Controls.Add(btnO);
+            Controls.Add(btn35);
+            Controls.Add(btnL);
+            Controls.Add(btn61);
+            Controls.Add(btnP);
+            Controls.Add(btn42);
+            Controls.Add(btnK);
+            Controls.Add(btn15);
+            Controls.Add(btnA);
+            Controls.Add(btn34);
+            Controls.Add(btnJ);
+            Controls.Add(btn55);
+            Controls.Add(btnS);
+            Controls.Add(btn43);
+            Controls.Add(btnD);
+            Controls.Add(btn21);
+            Controls.Add(btnG);
+            Controls.Add(btn32);
+            Controls.Add(btnF);
+            Controls.Add(btn54);
+            Controls.Add(btn44);
+            Controls.Add(btn31);
+            Controls.Add(btn53);
+            Controls.Add(btn25);
+            Controls.Add(btn23);
+            Controls.Add(btn51);
+            Controls.Add(btn52);
+            Controls.Add(btn24);
+            Controls.Add(pictureBoxFundo);
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "FormJogo";
             Text = "JogoTermo - IFSP - JoaoMesquita";
-            groupBox1.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)IconMusic).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxFundo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -968,9 +986,10 @@
         private Button btnN;
         private Button btnM;
         private Button btnEnter;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
         private Label lblTimer;
         private Button btnReiniciar;
+        private PictureBox IconMusic;
+        private PictureBox pictureBoxFundo;
+        private Button button1;
     }
 }
