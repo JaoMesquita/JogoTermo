@@ -20,12 +20,13 @@ namespace TermoApp
             player.PlayLooping();
             InicializaTimer();
 
-            termo = new Termo();
             this.KeyPreview = true;
             this.KeyDown += FormJogo_KeyDown;
             this.AcceptButton = null;
             this.ActiveControl = null;
             this.Focus();
+
+            this.Load += FormJogo_Load; // Adicione esta linha!
         }
 
         private void InicializaTimer()
@@ -63,16 +64,25 @@ namespace TermoApp
                 var botao = RetornaBotao(nomeBotao);
                 palavra += botao.Text;
             }
-            termo.ChecaPalavra(palavra);
-            AtualizaTabuleiro();
-            coluna = 1;
-            if (termo.JogoFinalizado)
+
+            try
             {
-                if (timer != null)
-                    timer.Stop();
-                MessageBox.Show("Parabéns! Você acertou a palavra!", "Jogo Termo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                termo.ChecaPalavra(palavra);
+                AtualizaTabuleiro();
+                coluna = 1;
+
+                if (termo.JogoFinalizado)
+                {
+                    timer?.Stop();
+                    MessageBox.Show("Parabéns! Você acertou a palavra!", "Jogo Termo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private Button RetornaBotao(string name)
         {
@@ -212,6 +222,13 @@ namespace TermoApp
                 IconMusic.Image = Properties.Resources.musicOff;
                 player?.Stop();
             }
+        }
+
+        private async void FormJogo_Load(object sender, EventArgs e)
+        {
+            termo = new Termo();
+            await termo.InicializarComPalavrasOnlineOuArquivoAsync();
+            // Agora pode usar termo normalmente
         }
     }
 

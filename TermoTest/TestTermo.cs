@@ -47,5 +47,13 @@ namespace TermoTest
             }
             Console.WriteLine();
         }
+
+        [TestMethod]
+        public async Task TestJogoOnline()
+        {
+            Termo termo = new Termo();
+            await termo.InicializarComPalavrasOnlineOuArquivoAsync();
+            // ... resto do teste ...
+        }
     }
 }
