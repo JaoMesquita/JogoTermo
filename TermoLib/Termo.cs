@@ -1,4 +1,10 @@
-﻿using HtmlAgilityPack;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace TermoLib
 {
@@ -9,14 +15,14 @@ namespace TermoLib
             Caracter = caracter;
             Cor = cor;
         }
-
         public char Caracter;
         public char Cor;
     }
-
     public class Termo
     {
         public List<string> palavras = new();
+        private HashSet<string> palavrasSet = new(StringComparer.OrdinalIgnoreCase); // para validação rápida (palavras do jogo)
+        private HashSet<string> confereSet = new(StringComparer.OrdinalIgnoreCase);   // dicionário amplo para conferir existência
         public string palavraSorteada = string.Empty;
         public List<List<Letra>> tabuleiro;
         public Dictionary<char, char> teclado;
@@ -27,138 +33,269 @@ namespace TermoLib
         {
             palavraAtual = 1;
             tabuleiro = new List<List<Letra>>();
-            teclado = new Dictionary<char, char>();
-
-            // Inicializa o teclado com letras maiúsculas (A-Z)
+            teclado = new Dictionary<char, char> ();
             for (int i = 65; i <= 90; i++)
+            {
                 teclado.Add((char)i, 'C');
+            }
         }
 
         public void CarregaPalavras(string fileName)
         {
+            // Se arquivo não existir, deixa lista vazia (chamador tratará fallback)
             if (!File.Exists(fileName))
-                throw new FileNotFoundException($"Arquivo '{fileName}' não encontrado!");
+            {
+                palavras = new List<string>();
+                palavrasSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                return;
+            }
 
-            palavras = File.ReadAllLines(fileName)
-                           .Where(p => p.Length == 5)
-                           .Select(p => p.ToUpper())
-                           .ToList();
+            // Normaliza para maiúsculas, remove acentos e mantém apenas palavras com 5 letras
+            var cleaned = File.ReadAllLines(fileName)
+                              .Select(line => CleanWord(line))
+                              .Where(w => w.Length == 5)
+                              .Distinct(StringComparer.OrdinalIgnoreCase)
+                              .ToList();
+
+            // Atualiza coleções
+            palavras = cleaned;
+            palavrasSet = new HashSet<string>(cleaned, StringComparer.OrdinalIgnoreCase);
+
+            // Regrava o arquivo com as palavras limpas (opcional, mantém dicionário consistente)
+            try
+            {
+                File.WriteAllLines(fileName, palavras);
+            }
+            catch
+            {
+                // não propaga — chamador deve tratar se necessário
+            }
+        }
+
+        // Carrega arquivo grande de conferência (DicionarioConfere.txt).
+        // Mantém apenas palavras limpas de 5 letras (pois o jogo trabalha com 5 letras).
+        public void CarregaDicionarioConfere(string fileName)
+        {
+            // Assume que o arquivo já está pré-formatado: uma palavra por linha,
+            // maiúsculas e com exatamente 5 caracteres. Apenas carrega tal como está.
+            confereSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            if (!File.Exists(fileName))
+            {
+                // não lança — chamador pode decidir o que fazer
+                return;
+            }
+
+            var lines = File.ReadAllLines(fileName)
+                            .Select(l => l.Trim().ToUpperInvariant())
+                            .Where(l => l.Length == 5) // mantém apenas linhas com 5 caracteres
+                            .Distinct(StringComparer.OrdinalIgnoreCase);
+
+            confereSet = new HashSet<string>(lines, StringComparer.OrdinalIgnoreCase);
         }
 
         public void SorteiaPalavra()
         {
             if (palavras == null || palavras.Count == 0)
-                throw new Exception("Lista de palavras vazia. Inicialize o jogo corretamente.");
+                throw new InvalidOperationException("Lista de palavras vazia. Inicialize o jogo com um dicionário válido.");
 
-            Random rdn = new Random();
-            int index = rdn.Next(0, palavras.Count);
-            palavraSorteada = palavras[index].ToUpper();
+            var index = Random.Shared.Next(palavras.Count);
+            palavraSorteada = palavras[index];
+        }
+
+        // Verifica se a palavra existe no dicionário do jogo (lista carregada)
+        public bool PalavraValida(string palavra)
+        {
+            if (string.IsNullOrWhiteSpace(palavra))
+                return false;
+
+            var p = CleanWord(palavra);
+            return p.Length == 5 && palavrasSet != null && palavrasSet.Contains(p);
+        }
+
+        // Verifica existência no dicionário amplo (DicionarioConfere.txt)
+        public bool PalavraExisteNaLingua(string palavra)
+        {
+            if (string.IsNullOrWhiteSpace(palavra))
+                return false;
+
+            var p = CleanWord(palavra);
+            return p.Length == 5 && confereSet != null && confereSet.Contains(p);
         }
 
         public void ChecaPalavra(string palavra)
         {
             if (string.IsNullOrEmpty(palavraSorteada) || palavraSorteada.Length != 5)
-                throw new Exception("Palavra sorteada inválida! Inicialize o jogo corretamente.");
+                throw new InvalidOperationException("Palavra sorteada inválida.");
 
-            palavra = palavra.ToUpper();
+            var p = CleanWord(palavra);
 
-            if (palavra.Length != 5)
-                throw new Exception("A palavra digitada deve ter exatamente 5 letras!");
+            if (p.Length != 5)
+                throw new Exception("Palavra com tamanho incorreto!");
 
-            if (palavra == palavraSorteada)
+            if (!PalavraExisteNaLingua(p))
+                throw new Exception("Palavra inexistente no dicionário!");
+
+            if (p == palavraSorteada)
                 JogoFinalizado = true;
 
             var palavraTabuleiro = new List<Letra>();
 
-            for (int i = 0; i < palavra.Length; i++)
+            // Conta quantas vezes cada letra aparece na palavra sorteada
+            var contagem = new Dictionary<char, int>();
+            foreach (var ch in palavraSorteada)
             {
-                char cor;
+                if (!contagem.ContainsKey(ch)) contagem[ch] = 0;
+                contagem[ch]++;
+            }
 
-                if (palavra[i] == palavraSorteada[i])
+            // 1º Passo: marcar verdes
+            for (int i = 0; i < p.Length; i++)
+            {
+                if (p[i] == palavraSorteada[i])
                 {
-                    cor = 'V'; // Verde (letra correta e na posição certa)
-                }
-                else if (palavraSorteada.Contains(palavra[i]))
-                {
-                    cor = 'A'; // Amarelo (letra existe, mas posição errada)
+                    palavraTabuleiro.Add(new Letra(p[i], 'V'));
+                    contagem[p[i]]--; // usa uma instância da letra
                 }
                 else
                 {
-                    cor = 'P'; // Preto (letra inexistente)
+                    palavraTabuleiro.Add(new Letra(p[i], ' ')); // ainda não decidido
                 }
+            }
 
-                palavraTabuleiro.Add(new Letra(palavra[i], cor));
+            // 2º Passo: marcar amarelas e cinzas
+            for (int i = 0; i < p.Length; i++)
+            {
+                if (palavraTabuleiro[i].Cor == ' ') // não verde
+                {
+                    if (contagem.ContainsKey(p[i]) && contagem[p[i]] > 0)
+                    {
+                        palavraTabuleiro[i].Cor = 'A';
+                        contagem[p[i]]--; // usa uma instância da letra
+                    }
+                    else
+                    {
+                        palavraTabuleiro[i].Cor = 'P';
+                    }
+                }
+            }
 
-                if (teclado.ContainsKey(palavra[i]))
-                    teclado[palavra[i]] = cor;
+            // Atualiza tabuleiro e teclado
+            for (int i = 0; i < 5; i++)
+            {
+                var letra = palavraTabuleiro[i];
+                teclado[letra.Caracter] = letra.Cor;
             }
 
             tabuleiro.Add(palavraTabuleiro);
             palavraAtual++;
         }
 
-        public async Task<List<string>> BaixarPalavrasDicioAsync()
+
+        public async Task InicializarComPalavrasDoDicionarioAsync()
         {
-            var url = "https://www.dicio.com.br/palavras-com-cinco-letras/";
-            var web = new HtmlWeb();
-            var palavras = new List<string>();
+            // Garante que exista um arquivo "Dicionario.txt" válido antes de carregar
+            GarantirArquivoPalavras("Dicionario.txt", minWords: 10);
+            CarregaPalavras("Dicionario.txt");
 
-            try
-            {
-                var doc = await Task.Run(() => web.Load(url));
-                var nodes = doc.DocumentNode.SelectNodes("//a[@class='title']");
+            // Carrega o dicionário de conferência (arquivo grande com todas as palavras)
+            CarregaDicionarioConfere("DicionarioConfere.txt");
 
-                // Proteção contra estrutura alterada
-                if (nodes == null)
-                    return new List<string>();
+            // Se algum dos dicionários essenciais estiver vazio, lançar erro claro para o chamador (Form deve tratar)
+            if (palavras == null || palavras.Count == 0)
+                throw new InvalidOperationException("Não foi possível carregar palavras do arquivo local (Dicionario.txt).");
 
-                foreach (var node in nodes)
-                {
-                    var palavra = node.InnerText.Trim();
-                    if (palavra.Length == 5)
-                        palavras.Add(palavra.ToUpper());
-                }
-            }
-            catch
-            {
-                // Em caso de erro de conexão, retorna lista vazia
-                return new List<string>();
-            }
-
-            return palavras;
-        }
-
-        public async Task InicializarComPalavrasOnlineOuArquivoAsync()
-        {
-            try
-            {
-                palavras = await BaixarPalavrasDicioAsync();
-
-                if (palavras == null || palavras.Count == 0)
-                {
-                    // Fallback: tenta arquivo local
-                    if (File.Exists("Palavra.txt"))
-                    {
-                        CarregaPalavras("Palavra.txt");
-                    }
-                    else
-                    {
-                        // Fallback final: palavras embutidas
-                        palavras = new List<string>
-                        {
-                            "CASAS", "BOLAS", "TEMPO", "LIVRO", "MOUSE",
-                            "NINJA", "PLANO", "TERMO", "CINCO", "SONHO"
-                        };
-                    }
-                }
-            }
-            catch
-            {
-                // Qualquer exceção inesperada → fallback direto
-                palavras = new List<string> { "CASAS", "BOLAS", "TEMPO", "LIVRO", "MOUSE" };
-            }
+            if (confereSet == null || confereSet.Count == 0)
+                throw new InvalidOperationException("Não foi possível carregar o arquivo 'DicionarioConfere.txt' (ou está vazio). Coloque o arquivo com palavras de 5 letras.");
 
             SorteiaPalavra();
+            await Task.CompletedTask;
         }
+
+        // --- Helpers para validação/normalização do arquivo de palavras ---
+
+        // Garante que o arquivo existe e contém pelo menos minWords palavras válidas.
+        // Se necessário, limpa o arquivo e escreve uma lista corrigida. Se insuficiente, escreve palavras padrão.
+        public static void GarantirArquivoPalavras(string fileName, int minWords = 10)
+        {
+            var cleaned = new List<string>();
+
+            if (File.Exists(fileName))
+            {
+                var lines = File.ReadAllLines(fileName);
+                foreach (var line in lines)
+                {
+                    var w = CleanWord(line);
+                    if (w.Length == 5) cleaned.Add(w);
+                }
+                cleaned = cleaned.Distinct().ToList();
+            }
+
+            // palavras padrão usadas para recuperar arquivo se necessário
+            var defaults = new[]
+            {
+                "APOIO","TERMO","NADAR","DARDO","ANDAR","CARGO","CASAS","FRASE","VIRAR","MUNDO",
+                "LIVRO","PODER","SONHO","FORCA","SORTE","AMIGO","CORPO","CASAL","PLANO","FAVOR"
+            };
+
+            // Se houver poucas palavras válidas, combine com defaults até atingir minWords
+            var set = new HashSet<string>(cleaned);
+            foreach (var d in defaults)
+                set.Add(d);
+
+            cleaned = set.ToList();
+
+            // Se ainda não atingir minWords, repete defaults (provê número suficiente)
+            int idx = 0;
+            while (cleaned.Count < minWords)
+            {
+                var candidate = defaults[idx % defaults.Length];
+                if (!cleaned.Contains(candidate))
+                    cleaned.Add(candidate);
+                idx++;
+                if (idx > defaults.Length * 5) break; // proteção teórica
+            }
+
+            // escreve o arquivo com as palavras limpas (maiusculas, 5 letras)
+            try
+            {
+                File.WriteAllLines(fileName, cleaned);
+            }
+            catch
+            {
+                // não propaga exceção aqui: chamador tratará se não conseguir carregar depois
+            }
+        }
+
+        private static string CleanWord(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return string.Empty;
+            var s = input.Trim().ToUpperInvariant();
+            s = RemoveDiacritics(s);
+            var sb = new StringBuilder(5);
+            foreach (var ch in s)
+            {
+                if (ch >= 'A' && ch <= 'Z')
+                    sb.Append(ch);
+                if (sb.Length == 5) break;
+            }
+            return sb.ToString();
+        }
+
+        private static string RemoveDiacritics(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return text;
+            var normalized = text.Normalize(NormalizationForm.FormD);
+            var sb = new StringBuilder();
+            foreach (var ch in normalized)
+            {
+                var uc = CharUnicodeInfo.GetUnicodeCategory(ch);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                    sb.Append(ch);
+            }
+            return sb.ToString().Normalize(NormalizationForm.FormC);
+        }
+
+
     }
 }

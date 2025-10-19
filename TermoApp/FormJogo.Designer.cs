@@ -90,7 +90,8 @@
             btnReiniciar = new Button();
             IconMusic = new PictureBox();
             pictureBoxFundo = new PictureBox();
-            button1 = new Button();
+            btnInfo = new Button();
+            btnHistorico = new Button();
             ((System.ComponentModel.ISupportInitialize)IconMusic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxFundo).BeginInit();
             SuspendLayout();
@@ -794,7 +795,7 @@
             lblTimer.AutoSize = true;
             lblTimer.BackColor = Color.White;
             lblTimer.Font = new Font("Unispace", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTimer.Location = new Point(571, 35);
+            lblTimer.Location = new Point(636, 29);
             lblTimer.Name = "lblTimer";
             lblTimer.Size = new Size(0, 36);
             lblTimer.TabIndex = 60;
@@ -802,7 +803,7 @@
             // btnReiniciar
             // 
             btnReiniciar.Cursor = Cursors.Hand;
-            btnReiniciar.Font = new Font("Segoe Print", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReiniciar.Font = new Font("Cascadia Mono", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnReiniciar.Location = new Point(692, 503);
             btnReiniciar.Name = "btnReiniciar";
             btnReiniciar.Size = new Size(152, 47);
@@ -816,7 +817,7 @@
             IconMusic.BackColor = Color.Transparent;
             IconMusic.Cursor = Cursors.Hand;
             IconMusic.Image = Properties.Resources.MusicOn;
-            IconMusic.Location = new Point(863, 12);
+            IconMusic.Location = new Point(863, 23);
             IconMusic.Name = "IconMusic";
             IconMusic.Size = new Size(56, 45);
             IconMusic.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -836,16 +837,29 @@
             pictureBoxFundo.TabIndex = 64;
             pictureBoxFundo.TabStop = false;
             // 
-            // button1
+            // btnInfo
             // 
-            button1.AutoSize = true;
-            button1.BackColor = Color.DarkSalmon;
-            button1.Image = Properties.Resources.infoImagem;
-            button1.Location = new Point(801, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(43, 45);
-            button1.TabIndex = 65;
-            button1.UseVisualStyleBackColor = false;
+            btnInfo.AutoSize = true;
+            btnInfo.BackColor = Color.DarkSalmon;
+            btnInfo.Image = Properties.Resources.infoImagem;
+            btnInfo.Location = new Point(801, 23);
+            btnInfo.Name = "btnInfo";
+            btnInfo.Size = new Size(43, 45);
+            btnInfo.TabIndex = 65;
+            btnInfo.UseVisualStyleBackColor = false;
+            btnInfo.Click += btnInfo_Click;
+            // 
+            // btnHistorico
+            // 
+            btnHistorico.AutoSize = true;
+            btnHistorico.BackColor = Color.DarkSalmon;
+            btnHistorico.Font = new Font("Cascadia Mono", 13.2000008F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHistorico.Location = new Point(426, 23);
+            btnHistorico.Name = "btnHistorico";
+            btnHistorico.Size = new Size(194, 50);
+            btnHistorico.TabIndex = 66;
+            btnHistorico.Text = "HISTÓRICO";
+            btnHistorico.UseVisualStyleBackColor = false;
             // 
             // FormJogo
             // 
@@ -853,7 +867,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkSalmon;
             ClientSize = new Size(931, 600);
-            Controls.Add(button1);
+            Controls.Add(btnHistorico);
+            Controls.Add(btnInfo);
             Controls.Add(btnH);
             Controls.Add(btn45);
             Controls.Add(btnEnter);
@@ -990,6 +1005,7 @@
         private Button btnReiniciar;
         private PictureBox IconMusic;
         private PictureBox pictureBoxFundo;
-        private Button button1;
+        private Button btnInfo;
+        private Button btnHistorico;
     }
 }
