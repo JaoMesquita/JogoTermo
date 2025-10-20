@@ -153,7 +153,7 @@ namespace TermoApp
             lblTimer.Text = tempo.ToString(@"mm\:ss\.ff");
         }
 
-        private void btnEnter_Click(object sender, EventArgs e)
+        private async void btnEnter_Click(object sender, EventArgs e)
         {
             var palavra = string.Empty;
             for (int i = 1; i <= 5; i++)
@@ -186,13 +186,26 @@ namespace TermoApp
                 }
 
                 termo.ChecaPalavra(palavra);
-                _ = AtualizaTabuleiroAsync();
+                await AtualizaTabuleiroAsync();
                 coluna = 1;
 
                 if (termo.JogoFinalizado)
                 {
                     timer?.Stop();
-                    MessageBox.Show("Parabéns! Você acertou a palavra: " + termo.palavraSorteada, "Jogo Termo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    await AnimarVitoriaAsync();
+
+                    try
+                    {
+                        using (var winPlayer = new SoundPlayer(Properties.Resources.WinSound))
+                        {
+                            winPlayer.Play();
+                        }
+                    }
+                    catch {  }
+
+                    MessageBox.Show("🎉 Parabéns! Você acertou a palavra: " + termo.palavraSorteada,
+                        "Jogo Termo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else if (termo.palavraAtual > 6)
                 {
@@ -205,6 +218,7 @@ namespace TermoApp
                 MessageBox.Show(ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private Button RetornaBotao(string name)
         {
@@ -453,5 +467,44 @@ namespace TermoApp
                 await Task.Delay(150);
             }
         }
+
+        private async Task AnimarVitoriaAsync()
+        {
+            int linhaFinal = termo.palavraAtual - 1;
+
+            // todos os botões da linha final (palavra correta)
+            var botoes = Enumerable.Range(1, 5)
+                .Select(i => RetornaBotao($"btn{linhaFinal}{i}"))
+                .ToList();
+
+            // anima todos com efeito bounce + brilho
+            for (int r = 0; r < 3; r++)
+            {
+                foreach (var b in botoes)
+                {
+                    await Task.Delay(40);
+                    _ = AnimarBounceVerde(b);
+                }
+                await Task.Delay(250);
+            }
+        }
+
+        private async Task AnimarBounceVerde(Button botao)
+        {
+            Color original = botao.BackColor;
+            var tamanhoOriginal = botao.Font.Size;
+
+            // Efeito “pulo” com flash verde
+            for (int i = 0; i < 2; i++)
+            {
+                botao.BackColor = Color.LimeGreen;
+                botao.Font = new Font(botao.Font.FontFamily, tamanhoOriginal + 6, botao.Font.Style);
+                await Task.Delay(80);
+                botao.Font = new Font(botao.Font.FontFamily, tamanhoOriginal, botao.Font.Style);
+                botao.BackColor = original;
+                await Task.Delay(80);
+            }
+        }
+
     }
 }

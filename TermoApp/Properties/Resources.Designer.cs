@@ -127,5 +127,14 @@ namespace TermoApp.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream WinSound {
+            get {
+                return ResourceManager.GetStream("WinSound", resourceCulture);
+            }
+        }
     }
 }
